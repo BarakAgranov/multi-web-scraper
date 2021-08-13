@@ -1,0 +1,7 @@
+include ':api'
+include ':util'
+include ':domain-services:website-service'
+include ':domain-services:search-service'
+include ':domain-services:scraper-service'
+include ':domain-services:result-service'
+

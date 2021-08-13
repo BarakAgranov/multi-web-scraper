@@ -1,0 +1,12 @@
+server.port: 7002
+
+app:
+  website-service:
+    host: localhost
+    port: 7001
+  scraper-service:
+    host: localhost
+    port: 7003
+  result-service:
+    host: localhost
+    port: 7004

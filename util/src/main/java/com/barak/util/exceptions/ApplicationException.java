@@ -1,6 +1,4 @@
-package com.barak.websiteservice.exceptions;
-
-import com.barak.websiteservice.enums.ErrorType;
+package com.barak.util.exceptions;
 
 public class ApplicationException extends Exception{
 

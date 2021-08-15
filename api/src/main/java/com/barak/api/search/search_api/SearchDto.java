@@ -2,13 +2,13 @@ package com.barak.api.search.search_api;
 
 public class SearchDto {
 
-    private final int id;
-    private final String name;
-    private final String description;
-    private final int websiteId;
-    private final String websiteName;
-    private final String preferredBrowser;
-    private final String websiteUrl;
+    private int id;
+    private String name;
+    private String description;
+    private int websiteId;
+    private String websiteName;
+    private String preferredBrowser;
+    private String websiteUrl;
     private String serviceAddress;
 
     public SearchDto(int id, String name, String description, int websiteId, String websiteName, String preferredBrowser, String websiteUrl) {
@@ -19,16 +19,6 @@ public class SearchDto {
         this.websiteName = websiteName;
         this.preferredBrowser = preferredBrowser;
         this.websiteUrl = websiteUrl;
-    }
-
-    public SearchDto() {
-        this.id = 0;
-        this.name = null;
-        this.description = null;
-        this.websiteId = 0;
-        this.websiteName = null;
-        this.preferredBrowser = null;
-        this.websiteUrl = null;
     }
 
     public int getId() {
@@ -61,6 +51,30 @@ public class SearchDto {
 
     public String getServiceAddress() {
         return serviceAddress;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setWebsiteId(int websiteId) {
+        this.websiteId = websiteId;
+    }
+
+    public void setWebsiteName(String websiteName) {
+        this.websiteName = websiteName;
+    }
+
+    public void setPreferredBrowser(String preferredBrowser) {
+        this.preferredBrowser = preferredBrowser;
+    }
+
+    public void setWebsiteUrl(String websiteUrl) {
+        this.websiteUrl = websiteUrl;
     }
 
     public void setServiceAddress(String serviceAddress) {

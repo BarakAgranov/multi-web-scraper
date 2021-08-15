@@ -1,11 +1,12 @@
 package com.barak.searchservice.logic.controllers;
 
 import com.barak.api.search.search_api.SearchDto;
+import com.barak.api.website.website_api.WebSiteDto;
 import com.barak.searchservice.entities.SearchEntity;
-import com.barak.searchservice.enums.ErrorType;
-import com.barak.searchservice.exceptions.ApplicationException;
 import com.barak.searchservice.logic.mappers.ISearchMapper;
 import com.barak.searchservice.repositories.ISearchRepository;
+import com.barak.util.exceptions.ApplicationException;
+import com.barak.util.exceptions.ErrorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -23,7 +24,7 @@ public class SearchController {
         this.searchMapper = searchMapper;
     }
 
-    public void createSearch(SearchDto searchDto) throws ApplicationException {
+    public void createSearch(SearchDto searchDto, WebSiteDto webSiteDto) throws ApplicationException {
         SearchEntity searchEntity = searchMapper.dtoToSearchCreate(searchDto);
         validateSearch(searchEntity, false);
         try {
@@ -34,7 +35,7 @@ public class SearchController {
 
     }
 
-    public void updateSearch(SearchDto searchDto) throws ApplicationException {
+    public void updateSearch(SearchDto searchDto, WebSiteDto webSiteDto) throws ApplicationException {
         try {
             SearchEntity searchEntity = searchRepository.findById(searchDto.getId()).get();
             if (searchEntity instanceof SearchEntity) {

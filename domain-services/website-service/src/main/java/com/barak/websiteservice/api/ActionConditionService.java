@@ -1,36 +1,46 @@
 package com.barak.websiteservice.api;
 
 import com.barak.api.website.action_condition_api.ActionConditionDto;
-import com.barak.api.website.action_condition_api.IActionConditionService;
-import org.springframework.web.bind.annotation.RestController;
+import com.barak.util.exceptions.ApplicationException;
+import com.barak.websiteservice.logic.controllers.ActionConditionController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class ActionConditionService implements IActionConditionService {
+@RequestMapping("/condition")
+public class ActionConditionService {
 
-    @Override
-    public void createCondition(ActionConditionDto actionConditionDto) {
+    private ActionConditionController actionConditionController;
 
+    @Autowired
+    public ActionConditionService(ActionConditionController actionConditionController) {
+        this.actionConditionController = actionConditionController;
     }
 
-    @Override
-    public void updateCondition(ActionConditionDto actionConditionDto) {
-
+    @PostMapping
+    public void createCondition(@RequestBody ActionConditionDto actionConditionDto) throws ApplicationException {
+        actionConditionController.createActionCondition(actionConditionDto);
     }
 
-    @Override
-    public void deleteCondition(long conditionId) {
-
+    @PutMapping
+    public void updateCondition(@RequestBody ActionConditionDto actionConditionDto) throws ApplicationException {
+        actionConditionController.updateActionCondition(actionConditionDto);
     }
 
-    @Override
-    public List<ActionConditionDto> getAllConditions() {
-        return null;
+    @DeleteMapping("/{conditionId}")
+    public void deleteCondition(@PathVariable int conditionId) throws ApplicationException {
+        actionConditionController.deleteActionCondition(conditionId);
     }
 
-    @Override
-    public ActionConditionDto getCondition(long conditionId) {
-        return null;
+    @GetMapping
+    public List<ActionConditionDto> getAllConditions() throws ApplicationException {
+        return actionConditionController.getAllActionConditionDto();
+    }
+
+    @GetMapping("/{conditionId}")
+    public ActionConditionDto getCondition(@PathVariable int conditionId) throws ApplicationException {
+        return actionConditionController.getActionConditionDto(conditionId);
     }
 }

@@ -1,6 +1,8 @@
 package com.barak.api.website.element_action_api;
 
-public class ElementActionDto {
+import com.barak.api.website.WebSiteComponent;
+
+public class ElementActionDto extends WebSiteComponent {
 
     private final int id;
     private final String name;

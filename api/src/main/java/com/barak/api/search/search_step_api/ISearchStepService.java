@@ -9,27 +9,27 @@ public interface ISearchStepService {
     @PostMapping(
             value = "/step",
             produces = "application/json")
-    void createStep(@RequestBody SearchStepDto searchStepDto);
+    void createStep(@RequestBody SearchStepDto searchStepDto) throws Exception;
 
     @PutMapping(
             value = "/step",
             produces = "application/json")
-    void updateStep(@RequestBody SearchStepDto searchStepDto);
+    void updateStep(@RequestBody SearchStepDto searchStepDto) throws Exception;
 
     @DeleteMapping(
             value = "/step/{stepId}",
             produces = "application/json")
-    void deleteStep(@PathVariable long stepId);
+    void deleteStep(@PathVariable long stepId) throws Exception;
 
     @GetMapping(
             value = "/step",
             produces = "application/json"
     )
-    List<SearchStepDto> getAllSteps();
+    List<SearchStepDto> getAllSteps() throws Exception;
 
     @GetMapping(
             value = "/step/{stepId}",
             produces = "application/json"
     )
-    SearchStepDto getStep(@PathVariable long stepId);
+    SearchStepDto getStep(@PathVariable long stepId) throws Exception;
 }

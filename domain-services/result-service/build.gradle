@@ -33,6 +33,7 @@ dependencies {
 	annotationProcessor('org.mapstruct:mapstruct-processor:1.4.2.Final')
 	implementation project(':api')
 	implementation project(':util')
+	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
 test {

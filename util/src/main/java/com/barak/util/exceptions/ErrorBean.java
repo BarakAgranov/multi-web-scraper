@@ -1,4 +1,4 @@
-package com.barak.websiteservice.exceptions;
+package com.barak.util.exceptions;
 
 public class ErrorBean {
 

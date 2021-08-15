@@ -1,37 +1,47 @@
 package com.barak.websiteservice.api;
 
 
-import com.barak.api.website.webpage_api.IWebPageService;
 import com.barak.api.website.webpage_api.WebPageDto;
-import org.springframework.web.bind.annotation.RestController;
+import com.barak.util.exceptions.ApplicationException;
+import com.barak.websiteservice.logic.controllers.WebPageController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class WebPageService implements IWebPageService {
+@RequestMapping("/page")
+public class WebPageService {
 
-    @Override
-    public void createWebPage(WebPageDto webPageDto) {
+    private WebPageController webPageController;
 
+    @Autowired
+    public WebPageService(WebPageController webPageController) {
+        this.webPageController = webPageController;
     }
 
-    @Override
-    public void updateWebPage(WebPageDto webPageDto) {
-
+    @PostMapping
+    public void createWebPage(@RequestBody WebPageDto webPageDto) throws ApplicationException {
+        webPageController.createWebPage(webPageDto);
     }
 
-    @Override
-    public void deleteWebPage(long webPageId) {
-
+    @PutMapping
+    public void updateWebPage(@RequestBody WebPageDto webPageDto) throws ApplicationException {
+        webPageController.updateWebPage(webPageDto);
     }
 
-    @Override
-    public List<WebPageDto> getAllWebPages() {
-        return null;
+    @DeleteMapping("/{webPageId}")
+    public void deleteWebPage(@PathVariable int webPageId) throws ApplicationException {
+        webPageController.deleteWebPage(webPageId);
     }
 
-    @Override
-    public WebPageDto getWebPage(long webPageId) {
-        return null;
+    @GetMapping
+    public List<WebPageDto> getAllWebPages() throws ApplicationException {
+        return webPageController.getAllWebPageDto();
+    }
+
+    @GetMapping
+    public WebPageDto getWebPage(@PathVariable int webPageId) throws ApplicationException {
+        return webPageController.getWebPageDto(webPageId);
     }
 }

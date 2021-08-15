@@ -9,27 +9,27 @@ public interface IWebSiteService {
     @PostMapping(
             value = "/website",
             produces = "application/json")
-    void createWebSite(@RequestBody WebSiteDto webSiteDto);
+    void createWebSite(@RequestBody WebSiteDto webSiteDto) throws Exception;
 
     @PutMapping(
             value = "/website",
             produces = "application/json")
-    void updateWebSite(@RequestBody WebSiteDto webSiteDto);
+    void updateWebSite(@RequestBody WebSiteDto webSiteDto) throws Exception;
 
     @DeleteMapping(
             value = "/website/{webSiteId}",
             produces = "application/json")
-    void deleteWebSite(@PathVariable long webSiteId);
+    void deleteWebSite(@PathVariable int webSiteId) throws Exception;
 
     @GetMapping(
             value = "/website",
             produces = "application/json"
     )
-    List<WebSiteDto> getAllWebsites();
+    List<WebSiteDto> getAllWebsites() throws Exception;
 
     @GetMapping(
             value = "/website/{webSiteId}",
             produces = "application/json")
-    WebSiteDto getWebSite(@PathVariable long webSiteId);
+    WebSiteDto getWebSite(@PathVariable int webSiteId) throws Exception;
 
 }

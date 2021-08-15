@@ -1,9 +1,9 @@
 package com.barak.websiteservice.logic.controllers;
 
 import com.barak.api.website.webpage_api.WebPageDto;
+import com.barak.util.exceptions.ApplicationException;
+import com.barak.util.exceptions.ErrorType;
 import com.barak.websiteservice.entities.WebPageEntity;
-import com.barak.websiteservice.enums.ErrorType;
-import com.barak.websiteservice.exceptions.ApplicationException;
 import com.barak.websiteservice.logic.mappers.IWebPageMapper;
 import com.barak.websiteservice.repositories.IWebPageRepository;
 import org.springframework.beans.factory.annotation.Autowired;

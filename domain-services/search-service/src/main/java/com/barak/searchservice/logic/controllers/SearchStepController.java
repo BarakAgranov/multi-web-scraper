@@ -1,7 +1,6 @@
 package com.barak.searchservice.logic.controllers;
 
 import com.barak.api.search.search_step_api.SearchStepDto;
-import com.barak.api.website.WebSiteComponent;
 import com.barak.searchservice.entities.SearchStepEntity;
 import com.barak.searchservice.logic.mappers.ISearchStepMapper;
 import com.barak.searchservice.repositories.ISearchStepRepository;

@@ -24,13 +24,15 @@ repositories {
 
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-webflux')
-	runtimeOnly('mysql:mysql-connector-java')
+	implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+	testImplementation('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('io.projectreactor:reactor-test')
 	implementation('org.mapstruct:mapstruct:1.4.2.Final')
 	annotationProcessor('org.mapstruct:mapstruct-processor:1.4.2.Final')
+	testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+	compileOnly "org.mapstruct:mapstruct-processor:1.4.2.Final"
 	implementation project(':api')
 	implementation project(':util')
 	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'

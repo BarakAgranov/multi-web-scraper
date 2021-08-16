@@ -1,8 +1,6 @@
 package com.barak.api.website.website_api;
 
-import com.barak.api.website.WebSiteComponent;
-
-public class WebSiteDto extends WebSiteComponent {
+public class WebSiteDto {
 
     private final int id;
     private final String name;

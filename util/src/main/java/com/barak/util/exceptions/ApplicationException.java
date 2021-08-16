@@ -1,6 +1,6 @@
 package com.barak.util.exceptions;
 
-public class ApplicationException extends Exception{
+public class ApplicationException extends RuntimeException{
 
     private ErrorType errorType;
 

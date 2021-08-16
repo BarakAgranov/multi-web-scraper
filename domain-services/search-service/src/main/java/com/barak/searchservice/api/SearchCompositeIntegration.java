@@ -1,14 +1,13 @@
 package com.barak.searchservice.api;
 
 import com.barak.api.search.search_step_api.SearchStepDto;
-import com.barak.api.website.WebSiteComponent;
 import com.barak.api.website.action_condition_api.ActionConditionDto;
 import com.barak.api.website.element_action_api.ElementActionDto;
 import com.barak.api.website.web_element_api.WebElementDto;
 import com.barak.api.website.webpage_api.WebPageDto;
 import com.barak.api.website.website_api.WebSiteDto;
-import com.barak.util.exceptions.InvalidInputException;
-import com.barak.util.exceptions.NotFoundException;
+import com.barak.util.exceptions.ApplicationException;
+import com.barak.util.exceptions.ErrorType;
 import com.barak.util.http.HttpErrorInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -19,8 +18,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Component
@@ -54,7 +51,7 @@ public class SearchCompositeIntegration {
         this.actionConditionServiceUrl = "http://" + webSiteServiceHost + ":" + webSiteServicePort + "/condition/";
     }
 
-    public WebSiteDto getWebSite(int websiteId) {
+    public WebSiteDto getWebSite(int websiteId) throws ApplicationException {
         try {
             String url = webSiteServiceUrl + websiteId;
             LOG.debug("Will call getWebSite API on URL: {}", url);
@@ -64,20 +61,20 @@ public class SearchCompositeIntegration {
 
             return webSiteDto;
         } catch (HttpClientErrorException e) {
-            switch (e.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException(e.getMessage());
-                case UNPROCESSABLE_ENTITY:
-                    throw new InvalidInputException();
-                default:
-                    LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
-                    LOG.warn("Error body: {}", e.getResponseBodyAsString());
-                    throw e;
+
+            Exception exception = handleHttpClientException(e);
+
+            if (exception instanceof ApplicationException) {
+                throw e;
+            } else {
+                LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getMessage());
+                LOG.warn("Error body: {}", e.getMessage());
+                throw new ApplicationException(ErrorType.GENERAL_ERROR, e.getMessage());
             }
         }
     }
 
-    public WebPageDto getWebPage(int pageId) {
+    public WebPageDto getWebPage(int pageId) throws ApplicationException {
         try {
             String url = webPageServiceUrl + pageId;
             LOG.debug("Will call getWebPage API on URL: {}", url);
@@ -87,20 +84,20 @@ public class SearchCompositeIntegration {
 
             return webPageDto;
         } catch (HttpClientErrorException e) {
-            switch (e.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException(e.getMessage());
-                case UNPROCESSABLE_ENTITY:
-                    throw new InvalidInputException();
-                default:
-                    LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
-                    LOG.warn("Error body: {}", e.getResponseBodyAsString());
-                    throw e;
+
+            Exception exception = handleHttpClientException(e);
+
+            if (exception instanceof ApplicationException) {
+                throw e;
+            } else {
+                LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getMessage());
+                LOG.warn("Error body: {}", e.getMessage());
+                throw new ApplicationException(ErrorType.GENERAL_ERROR, e.getMessage());
             }
         }
     }
 
-    public WebElementDto getWebElement(int elementId) {
+    public WebElementDto getWebElement(int elementId) throws ApplicationException {
         try {
             String url = webElementServiceUrl + elementId;
             LOG.debug("Will call getWebElement API on URL: {}", url);
@@ -110,20 +107,20 @@ public class SearchCompositeIntegration {
 
             return webElementDto;
         } catch (HttpClientErrorException e) {
-            switch (e.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException(e.getMessage());
-                case UNPROCESSABLE_ENTITY:
-                    throw new InvalidInputException();
-                default:
-                    LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
-                    LOG.warn("Error body: {}", e.getResponseBodyAsString());
-                    throw e;
+
+            Exception exception = handleHttpClientException(e);
+
+            if (exception instanceof ApplicationException) {
+                throw e;
+            } else {
+                LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getMessage());
+                LOG.warn("Error body: {}", e.getMessage());
+                throw new ApplicationException(ErrorType.GENERAL_ERROR, e.getMessage());
             }
         }
     }
 
-    public ElementActionDto getElementAction(int actionId) {
+    public ElementActionDto getElementAction(int actionId) throws ApplicationException {
         try {
             String url = elementActionServiceUrl + actionId;
             LOG.debug("Will call getElementAction API on URL: {}", url);
@@ -133,20 +130,21 @@ public class SearchCompositeIntegration {
 
             return elementActionDto;
         } catch (HttpClientErrorException e) {
-            switch (e.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException(e.getMessage());
-                case UNPROCESSABLE_ENTITY:
-                    throw new InvalidInputException();
-                default:
-                    LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
-                    LOG.warn("Error body: {}", e.getResponseBodyAsString());
-                    throw e;
+
+            Exception exception = handleHttpClientException(e);
+
+            if (exception instanceof ApplicationException) {
+                throw e;
+            } else {
+                LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getMessage());
+                LOG.warn("Error body: {}", e.getMessage());
+                throw new ApplicationException(ErrorType.GENERAL_ERROR, e.getMessage());
             }
         }
     }
 
-    public ActionConditionDto getActionCondition(int conditionId) {
+
+    public ActionConditionDto getActionCondition(int conditionId) throws ApplicationException {
         try {
             String url = actionConditionServiceUrl + conditionId;
             LOG.debug("Will call getActionCondition API on URL: {}", url);
@@ -155,49 +153,65 @@ public class SearchCompositeIntegration {
             LOG.debug("Found action with ID: {}", actionConditionDto.getId());
 
             return actionConditionDto;
+
         } catch (HttpClientErrorException e) {
-            switch (e.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException(e.getMessage());
-                case UNPROCESSABLE_ENTITY:
-                    throw new InvalidInputException();
-                default:
-                    LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
-                    LOG.warn("Error body: {}", e.getResponseBodyAsString());
-                    throw e;
+
+            Exception exception = handleHttpClientException(e);
+
+            if (exception instanceof ApplicationException) {
+                throw e;
+            } else {
+                LOG.warn("Got an unexpected HTTP error: {}, will rethrow it", e.getMessage());
+                LOG.warn("Error body: {}", e.getMessage());
+                throw new ApplicationException(ErrorType.GENERAL_ERROR, e.getMessage());
             }
+
         }
+
     }
 
-    public SearchStepDto getWebSiteComponents(SearchStepDto searchStepDto) {
+
+    public SearchStepDto getWebSiteComponents(SearchStepDto searchStepDto) throws ApplicationException {
 
         WebPageDto webPageDto = getWebPage(searchStepDto.getPageId());
+        WebElementDto elementDto = getWebElement(searchStepDto.getElementId());
+        ElementActionDto actionDto = getElementAction(searchStepDto.getActionId());
+        ActionConditionDto conditionDto = getActionCondition(searchStepDto.getConditionId());
+
         searchStepDto.setPageName(webPageDto.getName());
         searchStepDto.setPageUrl(webPageDto.getUrl());
-        WebElementDto elementDto = getWebElement(searchStepDto.getElementId());
+
         searchStepDto.setElementName(elementDto.getName());
         searchStepDto.setElementIdentifier(elementDto.getIdentifier());
         searchStepDto.setElementIdentifierType(elementDto.getIdentifierType());
-        ElementActionDto actionDto = getElementAction(searchStepDto.getActionId());
+
         searchStepDto.setActionName(actionDto.getName());
         searchStepDto.setActionType(actionDto.getActionType());
         searchStepDto.setActionInput(actionDto.getActionInput());
-        ActionConditionDto conditionDto = getActionCondition(searchStepDto.getConditionId());
+
         searchStepDto.setConditionName(conditionDto.getName());
         searchStepDto.setConditionType(conditionDto.getConditionType());
         searchStepDto.setMillisecondsToCheck(conditionDto.getMillisecondsToCheck());
         searchStepDto.setMillisecondsToWait(conditionDto.getMillisecondsToWait());
 
         return searchStepDto;
-    };
+    }
 
-    private String getErrorMessage(HttpClientErrorException e) {
-        try {
-            return objectMapper.readValue(e.getResponseBodyAsString(), HttpErrorInfo.class).getMessage();
-        } catch (IOException ioex) {
-            return e.getMessage();
-        }
+    private RuntimeException handleHttpClientException(HttpClientErrorException e) {
+
+        HttpErrorInfo errorInfo = getErrorInfo(e);
+        LOG.warn("Got a unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
+        LOG.warn("Error body: {}", e.getResponseBodyAsString());
+        return new ApplicationException(ErrorType.valueOf(errorInfo.getErrorName()), errorInfo.getMessage());
+
     }
 
 
+    private HttpErrorInfo getErrorInfo(HttpClientErrorException e) {
+        try {
+            return objectMapper.readValue(e.getResponseBodyAsString(), HttpErrorInfo.class);
+        } catch (IOException ioex) {
+            throw  e;
+        }
+    }
 }

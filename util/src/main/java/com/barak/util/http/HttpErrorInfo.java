@@ -6,43 +6,46 @@ import java.time.ZonedDateTime;
 
 public class HttpErrorInfo {
 
-    private final ZonedDateTime timestamp;
-    private final String path;
-    private final HttpStatus httpStatus;
+    private final String errorName;
+    private final int errorNumber;
     private final String message;
+    private final String path;
+    private final ZonedDateTime timestamp;
 
 
     public HttpErrorInfo() {
+        this.errorName = null;
         timestamp = null;
-        this.httpStatus = null;
+        this.errorNumber = 0;
         this.path = null;
         this.message = null;
     }
 
-    public HttpErrorInfo(HttpStatus httpStatus, String path, String message) {
+    public HttpErrorInfo(String errorName, int errorNumber, String path, String message) {
+        this.errorName = errorName;
         timestamp = ZonedDateTime.now();
-        this.httpStatus = httpStatus;
+        this.errorNumber = errorNumber;
         this.path = path;
         this.message = message;
     }
 
-    public ZonedDateTime getTimestamp() {
-        return timestamp;
+    public String getErrorName() {
+        return errorName;
+    }
+
+    public int getErrorNumber() {
+        return errorNumber;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public String getPath() {
         return path;
     }
 
-    public int getStatus() {
-        return httpStatus.value();
-    }
-
-    public String getError() {
-        return httpStatus.getReasonPhrase();
-    }
-
-    public String getMessage() {
-        return message;
+    public ZonedDateTime getTimestamp() {
+        return timestamp;
     }
 }

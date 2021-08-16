@@ -1,8 +1,6 @@
 package com.barak.api.website.action_condition_api;
 
-import com.barak.api.website.WebSiteComponent;
-
-public class ActionConditionDto extends WebSiteComponent {
+public class ActionConditionDto {
 
     private final int id;
     private final String name;

@@ -24,7 +24,7 @@ public class SearchController {
         this.searchMapper = searchMapper;
     }
 
-    public void createSearch(SearchDto searchDto, WebSiteDto webSiteDto) throws ApplicationException {
+    public void createSearch(SearchDto searchDto) throws ApplicationException {
         SearchEntity searchEntity = searchMapper.dtoToSearchCreate(searchDto);
         validateSearch(searchEntity, false);
         try {
@@ -35,7 +35,7 @@ public class SearchController {
 
     }
 
-    public void updateSearch(SearchDto searchDto, WebSiteDto webSiteDto) throws ApplicationException {
+    public void updateSearch(SearchDto searchDto) throws ApplicationException {
         try {
             SearchEntity searchEntity = searchRepository.findById(searchDto.getId()).get();
             if (searchEntity instanceof SearchEntity) {

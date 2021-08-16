@@ -2,7 +2,6 @@ package com.barak.searchservice.api;
 
 import com.barak.api.search.search_api.ISearchService;
 import com.barak.api.search.search_api.SearchDto;
-import com.barak.api.website.website_api.WebSiteDto;
 import com.barak.searchservice.logic.controllers.SearchController;
 import com.barak.util.exceptions.ApplicationException;
 import com.barak.util.http.ServiceUtil;
@@ -28,17 +27,17 @@ public class SearchService implements ISearchService {
     @Override
     public void createSearch(SearchDto searchDto) throws ApplicationException {
 
-        WebSiteDto webSiteDto = integration.getWebSite(searchDto.getWebsiteId());
+        SearchDto searchToCreate = integration.getSearchComponents(searchDto);
 
-        searchController.createSearch(searchDto, webSiteDto);
+        searchController.createSearch(searchToCreate);
     }
 
     @Override
     public void updateSearch(SearchDto searchDto) throws ApplicationException {
 
-        WebSiteDto webSiteDto = integration.getWebSite(searchDto.getWebsiteId());
+        SearchDto searchToUpdate = integration.getSearchComponents(searchDto);
 
-        searchController.updateSearch(searchDto, webSiteDto);
+        searchController.updateSearch(searchToUpdate);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.barak.websiteservice.api;
 
 import com.barak.api.website.element_action_api.ElementActionDto;
+import com.barak.api.website.element_action_api.IElementActionService;
 import com.barak.util.exceptions.ApplicationException;
 import com.barak.websiteservice.logic.controllers.ElementActionController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/action")
-public class ElementActionService {
+public class ElementActionService implements IElementActionService {
 
     private ElementActionController elementActionController;
 
@@ -19,27 +19,27 @@ public class ElementActionService {
         this.elementActionController = elementActionController;
     }
 
-    @PostMapping
+    @Override
     public void createAction(@RequestBody ElementActionDto elementActionDto) throws ApplicationException {
         elementActionController.createElementAction(elementActionDto);
     }
 
-    @PutMapping
+    @Override
     public void updateAction(@RequestBody ElementActionDto elementActionDto) throws ApplicationException {
         elementActionController.updateElementAction(elementActionDto);
     }
 
-    @DeleteMapping("/{actionId}")
+    @Override
     public void deleteAction(@PathVariable int actionId) throws ApplicationException {
         elementActionController.deleteElementAction(actionId);
     }
 
-    @GetMapping
+    @Override
     public List<ElementActionDto> getAllActions() throws ApplicationException {
         return elementActionController.getAllElementActionDto();
     }
 
-    @GetMapping("/{actionId}")
+    @Override
     public ElementActionDto getAction(@PathVariable int actionId) throws ApplicationException {
         return elementActionController.getElementActionDto(actionId);
     }

@@ -1,6 +1,7 @@
 package com.barak.websiteservice.api;
 
 import com.barak.api.website.action_condition_api.ActionConditionDto;
+import com.barak.api.website.action_condition_api.IActionConditionService;
 import com.barak.util.exceptions.ApplicationException;
 import com.barak.websiteservice.logic.controllers.ActionConditionController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/condition")
-public class ActionConditionService {
+public class ActionConditionService implements IActionConditionService {
 
     private ActionConditionController actionConditionController;
 
@@ -19,27 +19,27 @@ public class ActionConditionService {
         this.actionConditionController = actionConditionController;
     }
 
-    @PostMapping
-    public void createCondition(@RequestBody ActionConditionDto actionConditionDto) throws ApplicationException {
+    @Override
+    public void createCondition(ActionConditionDto actionConditionDto) throws ApplicationException {
         actionConditionController.createActionCondition(actionConditionDto);
     }
 
-    @PutMapping
+    @Override
     public void updateCondition(@RequestBody ActionConditionDto actionConditionDto) throws ApplicationException {
         actionConditionController.updateActionCondition(actionConditionDto);
     }
 
-    @DeleteMapping("/{conditionId}")
+    @Override
     public void deleteCondition(@PathVariable int conditionId) throws ApplicationException {
         actionConditionController.deleteActionCondition(conditionId);
     }
 
-    @GetMapping
+    @Override
     public List<ActionConditionDto> getAllConditions() throws ApplicationException {
         return actionConditionController.getAllActionConditionDto();
     }
 
-    @GetMapping("/{conditionId}")
+    @Override
     public ActionConditionDto getCondition(@PathVariable int conditionId) throws ApplicationException {
         return actionConditionController.getActionConditionDto(conditionId);
     }

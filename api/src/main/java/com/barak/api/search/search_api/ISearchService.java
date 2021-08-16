@@ -9,27 +9,27 @@ public interface ISearchService {
     @PostMapping(
             value = "/search",
             produces = "application/json")
-    void createSearch(@RequestBody SearchDto search) throws Exception;
+    void createSearch(@RequestBody SearchDto search);
 
     @PutMapping(
             value = "/search",
             produces = "application/json")
-    void updateSearch(@RequestBody SearchDto search) throws Exception;
+    void updateSearch(@RequestBody SearchDto search);
 
     @DeleteMapping(
             value = "/search/{searchId}",
             produces = "application/json")
-    void deleteSearch(@PathVariable int searchId) throws Exception;
+    void deleteSearch(@PathVariable int searchId);
 
     @GetMapping(
             value = "/search",
             produces = "application/json"
     )
-    List<SearchDto> getAllSearches() throws Exception;
+    List<SearchDto> getAllSearches();
 
     @GetMapping(
             value = "/search/{searchId}",
             produces = "application/json"
     )
-    SearchDto getSearch(@PathVariable int searchId) throws Exception;
+    SearchDto getSearch(@PathVariable int searchId);
 }

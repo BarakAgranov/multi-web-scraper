@@ -1,6 +1,7 @@
 package com.barak.websiteservice.api;
 
 
+import com.barak.api.website.webpage_api.IWebPageService;
 import com.barak.api.website.webpage_api.WebPageDto;
 import com.barak.util.exceptions.ApplicationException;
 import com.barak.websiteservice.logic.controllers.WebPageController;
@@ -10,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/page")
-public class WebPageService {
+public class WebPageService implements IWebPageService {
 
     private WebPageController webPageController;
 
@@ -20,27 +20,27 @@ public class WebPageService {
         this.webPageController = webPageController;
     }
 
-    @PostMapping
+    @Override
     public void createWebPage(@RequestBody WebPageDto webPageDto) throws ApplicationException {
         webPageController.createWebPage(webPageDto);
     }
 
-    @PutMapping
+    @Override
     public void updateWebPage(@RequestBody WebPageDto webPageDto) throws ApplicationException {
         webPageController.updateWebPage(webPageDto);
     }
 
-    @DeleteMapping("/{webPageId}")
+    @Override
     public void deleteWebPage(@PathVariable int webPageId) throws ApplicationException {
         webPageController.deleteWebPage(webPageId);
     }
 
-    @GetMapping
+    @Override
     public List<WebPageDto> getAllWebPages() throws ApplicationException {
         return webPageController.getAllWebPageDto();
     }
 
-    @GetMapping
+    @Override
     public WebPageDto getWebPage(@PathVariable int webPageId) throws ApplicationException {
         return webPageController.getWebPageDto(webPageId);
     }

@@ -9,27 +9,27 @@ public interface IElementActionService {
     @PostMapping(
             value = "/action",
             produces = "application/json")
-    void createAction(@RequestBody ElementActionDto elementActionDto) throws Exception;
+    void createAction(@RequestBody ElementActionDto elementActionDto);
 
     @PutMapping(
             value = "/action",
             produces = "application/json")
-    void updateAction(@RequestBody ElementActionDto elementActionDto) throws Exception;
+    void updateAction(@RequestBody ElementActionDto elementActionDto);
 
     @DeleteMapping(
             value = "/action/{actionId}",
             produces = "application/json")
-    void deleteAction(@PathVariable long actionId) throws Exception;
+    void deleteAction(@PathVariable int actionId);
 
     @GetMapping(
             value = "/action",
             produces = "application/json"
     )
-    List<ElementActionDto> getAllActions() throws Exception;
+    List<ElementActionDto> getAllActions();
 
     @GetMapping(
             value = "/action/{actionId}",
             produces = "application/json"
     )
-    ElementActionDto getAction(@PathVariable long actionId) throws Exception;
+    ElementActionDto getAction(@PathVariable int actionId);
 }

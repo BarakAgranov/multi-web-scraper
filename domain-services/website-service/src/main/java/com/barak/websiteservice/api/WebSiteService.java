@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/website")
 public class WebSiteService implements IWebSiteService {
 
     private WebSiteController webSiteController;
@@ -40,7 +39,7 @@ public class WebSiteService implements IWebSiteService {
     public List<WebSiteDto> getAllWebsites() throws ApplicationException {
         return webSiteController.getAllWebSiteDto();
     }
-    @GetMapping("/{webSiteId}")
+    @Override
     public WebSiteDto getWebSite(@PathVariable int webSiteId) throws ApplicationException {
         return webSiteController.getWebSiteDto(webSiteId);
     }

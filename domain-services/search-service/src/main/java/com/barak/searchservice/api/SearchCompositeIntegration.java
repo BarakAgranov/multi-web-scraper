@@ -1,5 +1,6 @@
 package com.barak.searchservice.api;
 
+import com.barak.api.search.search_api.SearchDto;
 import com.barak.api.search.search_step_api.SearchStepDto;
 import com.barak.api.website.action_condition_api.ActionConditionDto;
 import com.barak.api.website.element_action_api.ElementActionDto;
@@ -171,7 +172,7 @@ public class SearchCompositeIntegration {
     }
 
 
-    public SearchStepDto getWebSiteComponents(SearchStepDto searchStepDto) throws ApplicationException {
+    public SearchStepDto getSearchStepComponents(SearchStepDto searchStepDto) throws ApplicationException {
 
         WebPageDto webPageDto = getWebPage(searchStepDto.getPageId());
         WebElementDto elementDto = getWebElement(searchStepDto.getElementId());
@@ -195,6 +196,17 @@ public class SearchCompositeIntegration {
         searchStepDto.setMillisecondsToWait(conditionDto.getMillisecondsToWait());
 
         return searchStepDto;
+    }
+
+    public SearchDto getSearchComponents(SearchDto searchDto) throws ApplicationException {
+
+        WebSiteDto webSiteDto = getWebSite(searchDto.getWebsiteId());
+
+        searchDto.setWebsiteName(webSiteDto.getName());
+        searchDto.setWebsiteUrl(webSiteDto.getUrl());
+        searchDto.setPreferredBrowser(webSiteDto.getPreferredBrowser());
+
+        return searchDto;
     }
 
     private RuntimeException handleHttpClientException(HttpClientErrorException e) {

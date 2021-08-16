@@ -9,27 +9,27 @@ public interface IWebElementService {
     @PostMapping(
             value = "/element",
             produces = "application/json")
-    void createWebElement(@RequestBody WebElementDto webElementDto) throws Exception;
+    void createWebElement(@RequestBody WebElementDto webElementDto);
 
     @PutMapping(
             value = "/element",
             produces = "application/json")
-    void updateWebElement(@RequestBody WebElementDto webElementDto) throws Exception;
+    void updateWebElement(@RequestBody WebElementDto webElementDto);
 
     @DeleteMapping(
             value = "/element/{elementId}",
             produces = "application/json")
-    void deleteWebElement(@PathVariable long elementId) throws Exception;
+    void deleteWebElement(@PathVariable int elementId);
 
     @GetMapping(
             value = "/element",
             produces = "application/json"
     )
-    List<WebElementDto> getAllWebElement() throws Exception;
+    List<WebElementDto> getAllWebElement();
 
     @GetMapping(
             value = "/element/{elementId}",
             produces = "application/json"
     )
-    WebElementDto getWebElement(@PathVariable long elementId) throws Exception;
+    WebElementDto getWebElement(@PathVariable int elementId);
 }

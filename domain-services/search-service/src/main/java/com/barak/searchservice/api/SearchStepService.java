@@ -27,15 +27,15 @@ public class SearchStepService implements ISearchStepService {
     @Override
     public void createStep(SearchStepDto searchStepDto) throws ApplicationException {
 
-        SearchStepDto stepToCreate = integration.getWebSiteComponents(searchStepDto);
+        SearchStepDto stepToCreate = integration.getSearchStepComponents(searchStepDto);
 
-        searchStepController.createSearchStep(searchStepDto);
+        searchStepController.createSearchStep(stepToCreate);
     }
 
     @Override
     public void updateStep(SearchStepDto searchStepDto) throws ApplicationException {
 
-        SearchStepDto stepToUpdate = integration.getWebSiteComponents(searchStepDto);
+        SearchStepDto stepToUpdate = integration.getSearchStepComponents(searchStepDto);
 
         searchStepController.updateSearchStep(stepToUpdate);
     }

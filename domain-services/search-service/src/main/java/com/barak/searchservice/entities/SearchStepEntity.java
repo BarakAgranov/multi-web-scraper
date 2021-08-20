@@ -12,6 +12,9 @@ public class SearchStepEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "name", nullable = false)
     private String name;
 

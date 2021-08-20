@@ -15,6 +15,9 @@ public class WebSiteEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
@@ -31,13 +34,13 @@ public class WebSiteEntity implements Serializable {
     @OneToMany(mappedBy = "webSiteEntity", cascade = CascadeType.REMOVE)
     private List<WebPageEntity> webPages;
 
-    public WebSiteEntity(int id, String name, String url, String description, BrowserType preferredBrowser, List<WebPageEntity> webPages) {
+    public WebSiteEntity(int id, String name, String url, String description, BrowserType preferredBrowser) {
         this.id = id;
         this.name = name;
         this.url = url;
         this.description = description;
         this.preferredBrowser = preferredBrowser;
-        this.webPages = webPages;
+
     }
 
     public WebSiteEntity() {
@@ -89,5 +92,9 @@ public class WebSiteEntity implements Serializable {
 
     public void setWebPages(List<WebPageEntity> webPages) {
         this.webPages = webPages;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 }

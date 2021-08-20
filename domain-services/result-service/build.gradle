@@ -18,6 +18,10 @@ group = 'com.barak.domain-services.result-service'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+jar {
+	enabled = false
+}
+
 repositories {
 	mavenCentral()
 }
@@ -36,6 +40,10 @@ dependencies {
 	implementation project(':api')
 	implementation project(':util')
 	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+	implementation platform('org.testcontainers:testcontainers-bom:1.15.2')
+	testImplementation 'org.testcontainers:testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:mongodb'
 }
 
 test {

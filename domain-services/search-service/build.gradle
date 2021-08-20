@@ -18,6 +18,10 @@ group = 'com.barak.domain-services.search-service'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+jar {
+	enabled = false
+}
+
 repositories {
 	mavenCentral()
 }
@@ -27,6 +31,7 @@ dependencies {
 	implementation project(':util')
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.boot:spring-boot-starter-webflux')
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.9'
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('mysql:mysql-connector-java')
 	implementation('org.mapstruct:mapstruct:1.4.2.Final')
@@ -40,6 +45,11 @@ dependencies {
 	testImplementation('com.h2database:h2')
 
 	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+
+	implementation platform('org.testcontainers:testcontainers-bom:1.15.2')
+	testImplementation 'org.testcontainers:testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:mysql'
 }
 
 test {

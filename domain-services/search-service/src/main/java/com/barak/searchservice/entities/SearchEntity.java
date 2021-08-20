@@ -12,6 +12,9 @@ public class SearchEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 

@@ -15,6 +15,9 @@ public class ElementActionEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -33,14 +36,13 @@ public class ElementActionEntity implements Serializable {
     @ManyToMany
     private List<WebElementEntity> webElements;
 
-    public ElementActionEntity(int id, String name, String description, ActionType actionType, String actionInput, List<ActionConditionEntity> actionCondition, List<WebElementEntity> webElements) {
+    public ElementActionEntity(int id, String name, String description, ActionType actionType, String actionInput) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.actionType = actionType;
         this.actionInput = actionInput;
-        this.actionCondition = actionCondition;
-        this.webElements = webElements;
+
     }
 
     public ElementActionEntity() {
@@ -102,5 +104,7 @@ public class ElementActionEntity implements Serializable {
         this.webElements = webElements;
     }
 
-
+    public Integer getVersion() {
+        return version;
+    }
 }

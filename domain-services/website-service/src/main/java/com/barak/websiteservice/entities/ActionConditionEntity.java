@@ -16,6 +16,9 @@ public class ActionConditionEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -34,14 +37,13 @@ public class ActionConditionEntity implements Serializable {
     @ManyToMany
     private List<ElementActionEntity> elementActions;
 
-    public ActionConditionEntity(int id, String name, String description, ConditionType conditionType, short millisecondsToWait, short millisecondsToCheck, List<ElementActionEntity> elementActions) {
+    public ActionConditionEntity(int id, String name, String description, ConditionType conditionType, short millisecondsToWait, short millisecondsToCheck) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.conditionType = conditionType;
         this.millisecondsToWait = millisecondsToWait;
         this.millisecondsToCheck = millisecondsToCheck;
-        this.elementActions = elementActions;
     }
 
     public ActionConditionEntity() {
@@ -102,4 +104,9 @@ public class ActionConditionEntity implements Serializable {
     public void setElementActions(List<ElementActionEntity> elementActions) {
         this.elementActions = elementActions;
     }
+
+    public Integer getVersion() {
+        return version;
+    }
+
 }

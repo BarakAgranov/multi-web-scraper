@@ -36,7 +36,7 @@ public class SearchEntity {
     @ManyToMany
     private List<SearchStepEntity> searchSteps;
 
-    public SearchEntity(int id, String name, String description,int websiteId, String websiteName, String preferredBrowser, String websiteUrl, List<SearchStepEntity> searchSteps) {
+    public SearchEntity(int id, String name, String description,int websiteId, String websiteName, String preferredBrowser, String websiteUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -44,7 +44,6 @@ public class SearchEntity {
         this.websiteName = websiteName;
         this.preferredBrowser = preferredBrowser;
         this.websiteUrl = websiteUrl;
-        this.searchSteps = searchSteps;
     }
 
     public SearchEntity() {
@@ -112,5 +111,9 @@ public class SearchEntity {
 
     public void setWebsiteId(int websiteId) {
         this.websiteId = websiteId;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 }

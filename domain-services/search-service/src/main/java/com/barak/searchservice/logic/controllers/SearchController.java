@@ -94,6 +94,9 @@ public class SearchController {
         }
         if (isUpdate == false) {
             try {
+                if (searchRepository.existsById(searchEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Search with this ID already exist: " + searchEntity.getId());
+                }
                 if (searchRepository.existsByName(searchEntity.getName())) {
                     throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Search name must be unique");
                 }

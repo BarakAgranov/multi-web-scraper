@@ -69,7 +69,7 @@ public class SearchStepEntity {
     @ManyToMany
     private List<SearchEntity> searches;
 
-    public SearchStepEntity(long id, String name, int pageId, String pageName, String pageUrl, int elementId, String elementName, String elementIdentifier, String elementIdentifierType, int actionId, String actionName, String actionType, String actionInput, int conditionId, String conditionName, String conditionType, int millisecondsToWait, int millisecondsToCheck, List<SearchEntity> searches) {
+    public SearchStepEntity(long id, String name, int pageId, String pageName, String pageUrl, int elementId, String elementName, String elementIdentifier, String elementIdentifierType, int actionId, String actionName, String actionType, String actionInput, int conditionId, String conditionName, String conditionType, int millisecondsToWait, int millisecondsToCheck) {
         this.id = id;
         this.name = name;
         this.pageId = pageId;
@@ -88,7 +88,6 @@ public class SearchStepEntity {
         this.conditionType = conditionType;
         this.millisecondsToWait = millisecondsToWait;
         this.millisecondsToCheck = millisecondsToCheck;
-        this.searches = searches;
     }
 
     public SearchStepEntity() {
@@ -244,5 +243,9 @@ public class SearchStepEntity {
 
     public void setSearches(List<SearchEntity> searches) {
         this.searches = searches;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 }

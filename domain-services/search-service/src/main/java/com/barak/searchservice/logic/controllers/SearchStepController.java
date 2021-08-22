@@ -42,7 +42,7 @@ public class SearchStepController {
                 validateSearchStep(updatedSearchStep, true);
                 searchStepRepository.save(updatedSearchStep);
             } else
-                throw new ApplicationException(ErrorType.CANNOT_BE_FOUND, "Search step With this ID could not be found: " + searchStepDto.getId());
+                throw new ApplicationException(ErrorType.CANNOT_BE_FOUND, "Step With this ID could not be found: " + searchStepDto.getId());
         } catch (Exception e) {
             if (e instanceof ApplicationException) {
                 throw e;
@@ -90,6 +90,17 @@ public class SearchStepController {
         }
         if (searchStepEntity.getMillisecondsToCheck() < 0 ) {
             throw new ApplicationException(ErrorType.VALUE_LOWER_THAN_ZERO, "Milliseconds to wait between checks must be at least 0");
+        }
+        if (isUpdate == false) {
+            try {
+                if (searchStepRepository.existsById(searchStepEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Step with this ID already exist: " + searchStepEntity.getId());
+                }
+            } catch (Exception e) {
+                if (e instanceof ApplicationException) {
+                    throw e;
+                } else throw new ApplicationException(ErrorType.SQL_ERROR, ErrorType.SQL_ERROR.getErrorMessage());
+            }
         }
 
 

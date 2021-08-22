@@ -84,6 +84,17 @@ public class ElementActionController {
         if (elementActionEntity.getActionType() == null) {
             throw new ApplicationException(ErrorType.MUST_HAVE_A_VALUE, "Element action must have action type");
         }
+        if (isUpdate == false) {
+            try {
+                if (elementActionRepository.existsById(elementActionEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Action with this ID already exist: " + elementActionEntity.getId());
+                }
+            } catch (Exception e) {
+                if (e instanceof ApplicationException) {
+                    throw e;
+                } else throw new ApplicationException(ErrorType.SQL_ERROR, ErrorType.SQL_ERROR.getErrorMessage());
+            }
+        }
 
     }
 

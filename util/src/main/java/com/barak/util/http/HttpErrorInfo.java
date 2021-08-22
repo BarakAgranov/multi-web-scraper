@@ -1,6 +1,5 @@
 package com.barak.util.http;
 
-import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 

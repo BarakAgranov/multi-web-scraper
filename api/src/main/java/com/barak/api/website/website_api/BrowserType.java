@@ -1,4 +1,4 @@
-package com.barak.websiteservice.enums;
+package com.barak.api.website.website_api;
 
 public enum BrowserType {
 

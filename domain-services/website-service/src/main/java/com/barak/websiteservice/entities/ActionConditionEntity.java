@@ -1,7 +1,7 @@
 package com.barak.websiteservice.entities;
 
 
-import com.barak.websiteservice.enums.ConditionType;
+import com.barak.api.website.action_condition_api.ConditionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +26,7 @@ public class ActionConditionEntity implements Serializable {
     private String description;
 
     @Column(name = "condition_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ConditionType conditionType;
 
     @Column(name = "milliseconds_to_wait")

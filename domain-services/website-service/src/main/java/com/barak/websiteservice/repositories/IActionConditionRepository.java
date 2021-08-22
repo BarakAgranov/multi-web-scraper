@@ -13,7 +13,7 @@ public interface IActionConditionRepository extends CrudRepository<ActionConditi
 
     boolean existsByName(String name);
 
-    @Query("select new com.barak.api.website.action_condition_api.ActionConditionDto(a.id, a.name, a.description, a.conditionType, a.millisecondsToWait, a.millisecondsToCheck ) from ActionConditionEntity a where a.name = ?1")
+    @Query("select new com.barak.api.website.action_condition_api.ActionConditionDto(a.id, a.name, a.description, a.conditionType, a.millisecondsToWait, a.millisecondsToCheck) from ActionConditionEntity a where a.name = ?1")
     ActionConditionDto getDtoByName(String name);
 
     @Query("select new com.barak.api.website.action_condition_api.ActionConditionDto(a.id, a.name, a.description, a.conditionType, a.millisecondsToWait, a.millisecondsToCheck ) from ActionConditionEntity a where a.id = ?1")

@@ -1,6 +1,6 @@
 package com.barak.websiteservice.entities;
 
-import com.barak.websiteservice.enums.ElementIdentifierType;
+import com.barak.api.website.web_element_api.ElementIdentifierType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,12 +28,13 @@ public class WebElementEntity implements Serializable {
     private String identifier;
 
     @Column(name = "identifier_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ElementIdentifierType identifierType;
 
     @ManyToOne
     private WebPageEntity webPageEntity;
 
-    @ManyToMany(mappedBy = "actionEntity")
+    @ManyToMany
     private List<ElementActionEntity> actionEntities;
 
     public WebElementEntity(int id, String name, String description, String identifier, ElementIdentifierType identifierType, WebPageEntity webPageEntity) {

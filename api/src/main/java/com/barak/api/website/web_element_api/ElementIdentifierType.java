@@ -1,4 +1,4 @@
-package com.barak.websiteservice.enums;
+package com.barak.api.website.web_element_api;
 
 public enum ElementIdentifierType {
 

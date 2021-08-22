@@ -19,6 +19,15 @@ public class ActionConditionDto {
         this.millisecondsToCheck = millisecondsToCheck;
     }
 
+    public ActionConditionDto(int id, String name, String description, ConditionType conditionType, short millisecondsToWait, short millisecondsToCheck) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.conditionType = conditionType.name();
+        this.millisecondsToWait = millisecondsToWait;
+        this.millisecondsToCheck = millisecondsToCheck;
+    }
+
     public ActionConditionDto() {
         this.id = 0;
         this.name = null;

@@ -15,7 +15,7 @@ public interface IWebSiteRepository extends CrudRepository<WebSiteEntity, Intege
 
     boolean existsByUrl(String url);
 
-    @Query("select new com.barak.api.website.website_api.WebSiteDto(w.id, w.name, w.description, w.url, w.preferredBrowser ) from WebSiteEntity w where w.name = ?1")
+    @Query("select new com.barak.api.website.website_api.WebSiteDto(w.id, w.name, w.description, w.url, w.preferredBrowser) from WebSiteEntity w where w.name = ?1")
     WebSiteDto getDtoByName(String name);
 
     @Query("select new com.barak.api.website.website_api.WebSiteDto(w.id, w.name, w.description, w.url, w.preferredBrowser ) from WebSiteEntity w where w.id = ?1")

@@ -7,7 +7,7 @@ public class WebSiteDto {
     private final String description;
     private final String url;
     private final String preferredBrowser;
-    private  String serviceAddress;
+    private String serviceAddress;
 
     public WebSiteDto() {
         this.id = 0;
@@ -15,6 +15,15 @@ public class WebSiteDto {
         this.description = null;
         this.url = null;
         this.preferredBrowser = null;
+    }
+
+    public WebSiteDto(int id, String name, String description, String url, BrowserType preferredBrowser) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.url = url;
+        this.preferredBrowser = preferredBrowser.name();
+
     }
 
     public WebSiteDto(int id, String name, String description, String url, String preferredBrowser) {

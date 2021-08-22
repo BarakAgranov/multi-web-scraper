@@ -88,6 +88,9 @@ public class WebPageController {
         }
         if (isUpdate == false) {
             try {
+                if (webPageRepository.existsById(webPageEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Web page with this ID already exist: " + webPageEntity.getId());
+                }
                 if (webPageRepository.existsByName(webPageEntity.getName())) {
                     throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Web page with this name already exist" + webPageEntity.getName());
                 }

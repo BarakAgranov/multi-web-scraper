@@ -91,11 +91,14 @@ public class WebSiteController {
         }
         if (isUpdate == false) {
             try {
+                if (webSiteRepository.existsById(webSiteEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Website with this ID already exist: " + webSiteEntity.getId());
+                }
                 if (webSiteRepository.existsByName(webSiteEntity.getName())) {
-                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Website with this name already exist" + webSiteEntity.getName());
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Website with this name already exist: " + webSiteEntity.getName());
                 }
                 if (webSiteRepository.existsByUrl(webSiteEntity.getUrl())) {
-                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Website with this url already exist" + webSiteEntity.getUrl());
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Website with this url already exist: " + webSiteEntity.getUrl());
                 }
             } catch (Exception e) {
                 if (e instanceof ApplicationException) {

@@ -2,11 +2,11 @@ package com.barak.websiteservice;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.barak.api.website.action_condition_api.ConditionType;
+import com.barak.api.website.element_action_api.ActionType;
+import com.barak.api.website.web_element_api.ElementIdentifierType;
+import com.barak.api.website.website_api.BrowserType;
 import com.barak.websiteservice.entities.*;
-import com.barak.websiteservice.enums.ActionType;
-import com.barak.websiteservice.enums.BrowserType;
-import com.barak.websiteservice.enums.ConditionType;
-import com.barak.websiteservice.enums.ElementIdentifierType;
 import com.barak.websiteservice.repositories.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +27,13 @@ public class PersistenceTests extends MySqlTestBase {
 
     @Autowired
     private IWebSiteRepository siteRepository;
+    @Autowired
     private IWebPageRepository pageRepository;
+    @Autowired
     private IWebElementRepository elementRepository;
+    @Autowired
     private IElementActionRepository actionRepository;
+    @Autowired
     private IActionConditionRepository conditionRepository;
 
     private WebSiteEntity savedSite;

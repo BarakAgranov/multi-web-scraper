@@ -17,6 +17,14 @@ public class ElementActionDto {
         this.actionInput = actionInput;
     }
 
+    public ElementActionDto(int id, String name, String description, ActionType actionType, String actionInput) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.actionType = actionType.name();
+        this.actionInput = actionInput;
+    }
+
     public ElementActionDto() {
         this.id = 0;
         this.name = null;

@@ -19,6 +19,15 @@ public class WebElementDto {
         this.pageId = pageId;
     }
 
+    public WebElementDto(int id, String name, String description, String identifier, ElementIdentifierType identifierType, int pageId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.identifier = identifier;
+        this.identifierType = identifierType.name().toUpperCase();
+        this.pageId = pageId;
+    }
+
     public WebElementDto() {
         this.id = 0;
         this.name = null;

@@ -88,7 +88,17 @@ public class WebElementController {
         if (webElementEntity.getIdentifierType() == null) {
             throw new ApplicationException(ErrorType.MUST_HAVE_A_VALUE, "Web element must have identifier type");
         }
-
+        if (isUpdate == false) {
+            try {
+                if (webElementRepository.existsById(webElementEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Web element with this ID already exist: " + webElementEntity.getId());
+                }
+            } catch (Exception e) {
+                if (e instanceof ApplicationException) {
+                    throw e;
+                } else throw new ApplicationException(ErrorType.SQL_ERROR, ErrorType.SQL_ERROR.getErrorMessage());
+            }
+        }
     }
 
 }

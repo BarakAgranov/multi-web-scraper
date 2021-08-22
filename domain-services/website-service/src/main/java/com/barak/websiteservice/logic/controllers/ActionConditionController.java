@@ -45,7 +45,7 @@ public class ActionConditionController {
                 validateActionCondition(updatedWebElement, true);
                 actionConditionRepository.save(updatedWebElement);
             } else
-                throw new ApplicationException(ErrorType.CANNOT_BE_FOUND, "Action condition With this ID could not be found: " + actionConditionDto.getId());
+                throw new ApplicationException(ErrorType.CANNOT_BE_FOUND, "Condition With this ID could not be found: " + actionConditionDto.getId());
         } catch (Exception e) {
             if (e instanceof ApplicationException) {
                 throw e;
@@ -94,8 +94,17 @@ public class ActionConditionController {
         if (actionConditionEntity.getMillisecondsToCheck() < 0 ) {
             throw new ApplicationException(ErrorType.VALUE_LOWER_THAN_ZERO, "Milliseconds to wait between checks must be at least 0");
         }
-
-
+        if (isUpdate == false) {
+            try {
+                if (actionConditionRepository.existsById(actionConditionEntity.getId())) {
+                    throw new ApplicationException(ErrorType.ALREADY_EXISTS, "Condition with this ID already exist: " + actionConditionEntity.getId());
+                }
+            } catch (Exception e) {
+                if (e instanceof ApplicationException) {
+                    throw e;
+                } else throw new ApplicationException(ErrorType.SQL_ERROR, ErrorType.SQL_ERROR.getErrorMessage());
+            }
+        }
     }
 
 }

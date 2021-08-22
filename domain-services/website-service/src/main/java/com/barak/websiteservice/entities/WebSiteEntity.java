@@ -1,6 +1,6 @@
 package com.barak.websiteservice.entities;
 
-import com.barak.websiteservice.enums.BrowserType;
+import com.barak.api.website.website_api.BrowserType;
 
 import javax.persistence.*;
 import java.io.Serializable;

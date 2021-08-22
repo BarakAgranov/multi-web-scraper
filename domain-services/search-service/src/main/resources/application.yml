@@ -8,24 +8,97 @@ api:
 
   common:
     version: 1.0.0
-    title: Sample API
-    description: Description of the API...
-    termsOfService: MY TERMS OF SERVICE
+    title: Search Service API
+    description: used for crud operations on search and search steps, aggregating info from WebSite Service
+    termsOfService: With great power comes great responsibility
     license: MY LICENSE
     licenseUrl: MY LICENSE URL
 
     externalDocDesc: MY WIKI PAGE
     externalDocUrl: MY WIKI URL
     contact:
-      name: NAME OF CONTACT
+      name: Barak
       url: URL TO CONTACT
-      email: contact@mail.com
+      email: agranov9@mail.com
 
   responseCodes:
     ok.description: OK
-    badRequest.description: Bad Request, invalid format of the request. See response message for more information
+    alreadyExists.description: Already Exists, the specified attribute already exists and must be unique
     notFound.description: Not found, the specified id does not exist
-    unprocessableEntity.description: Unprocessable entity, input parameters caused the processing to fail. See response message for more information
+    generalError.description: General error has occured, See response message for more information about the cause
+    badRequest.description: Bad Request, invalid format of the request. See response message for more information
+
+search-service:
+
+  get-search:
+    description: Returns a composite view of the specified Search id include information about the search components
+    notes: |
+      # Normal response
+      If the requested search id is found the method will return information regarding:
+      1. Search information
+      1. Website
+      1. Search steps
+      1. Service Addresses\n(technical information regarding the addresses of the microservices that created the response)
+      # Expected partial and error responses
+      1. If no search information is found, a **803 - Not Found** error will be returned
+      1. In no websites or steps are found for a search, a partial response will be returned
+  create-search:
+    description: Creates a search
+    notes: |
+      # Normal response
+      Will aggregate information about search components(website and search steps) into the new search and save it.
+      # Expected error responses
+      1. If a search with the same searchId as specified in the posted information already exists,
+         an **801 - Already Exists** error with a error message will be returned
+  delete-search:
+    description: Deletes a search
+    notes: |
+      # Normal response
+      Search will be deleted.
+      The implementation of the delete method is idempotent, i.e. it can be called several times with the same response.
+      This means that a delete request of a non-existing search will return **200 Ok**.
+
+search-step-service:
+
+  get-search-step:
+    description: Returns a composite view of the specified search step id
+    notes: |
+      # Normal response
+      If the requested step id is found the method will return information regarding:
+      1. step information
+      1. Web Page
+      1. Web Element
+      1. Element Action
+      1. Action Condition
+      1. Service Addresses\n(technical information regarding the addresses of the microservices that created the response)
+      # Expected partial and error responses
+      1. If no step information is found, a **803 - Not Found** error will be returned
+      1. In no page, element, action or condition are found for a step, a partial response will be returned
+  create-search-step:
+    description: Creates a search step
+    notes: |
+      # Normal response
+      Will aggregate information about search step components(page, element, action, condition) into the new search step and save it.
+      # Expected error responses
+      1. If a search step with the same stepId as specified in the posted information already exists,
+         an **801 - Already Exists** error with a error message will be returned
+  delete-search-step:
+    description: Deletes a search step
+    notes: |
+      # Normal response
+      Search step will be deleted.
+      The implementation of the delete method is idempotent, i.e. it can be called several times with the same response.
+      This means that a delete request of a non-existing product will return **200 Ok**.
+
+# Strongly recommended setting this property to "none" in a production environment!
+spring.jpa.hibernate.ddl-auto: update
+
+spring.datasource.hikari.initializationFailTimeout: 15000
+
+spring.datasource:
+  url: jdbc:mysql://localhost:3306/search-db
+  username: root
+  password: 9088007
 
 server.port: 7002
 server.error.include-message: always
@@ -45,7 +118,11 @@ logging:
   level:
     root: INFO
     com.barak: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptior.sql.BasicBinder: TRACE
+
 ---
+
 spring:
   config:
     activate:
@@ -61,5 +138,8 @@ app:
     host: scraper
     port: 8080
   result-service:
-    host: localhost
+    host: result
     port: 8080
+
+spring.datasource:
+  url: jdbc:mysql://localhost:3306/search-db

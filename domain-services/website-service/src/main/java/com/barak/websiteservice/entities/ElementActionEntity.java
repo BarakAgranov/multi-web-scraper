@@ -1,6 +1,6 @@
 package com.barak.websiteservice.entities;
 
-import com.barak.websiteservice.enums.ActionType;
+import com.barak.api.website.element_action_api.ActionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +25,7 @@ public class ElementActionEntity implements Serializable {
     private String description;
 
     @Column(name = "action_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ActionType actionType;
 
     @Column(name = "action_input")

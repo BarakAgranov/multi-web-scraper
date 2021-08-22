@@ -11,17 +11,16 @@ public interface ISearchStepService {
 
     @PostMapping(
             value = "/step",
-            produces = "application/json")
+            consumes = "application/json")
     void createStep(@RequestBody SearchStepDto searchStepDto) throws Exception;
 
     @PutMapping(
             value = "/step",
-            produces = "application/json")
+            consumes = "application/json")
     void updateStep(@RequestBody SearchStepDto searchStepDto) throws Exception;
 
     @DeleteMapping(
-            value = "/step/{stepId}",
-            produces = "application/json")
+            value = "/step/{stepId}")
     void deleteStep(@PathVariable long stepId) throws Exception;
 
     @GetMapping(

@@ -13,20 +13,16 @@ public interface ISearchStepRepository extends CrudRepository<SearchStepEntity, 
 
     boolean existsByName(String name);
 
-    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageName, s.pageUrl, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
-            " s.actionName, s.actionType, s.actionInput, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck, s.search.id) from SearchStepEntity s where s.name = ?1")
+    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageId, s.pageName, s.pageUrl, s.elementId, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
+            " s.actionId, s.actionName, s.actionType, s.actionInput, s.conditionId, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck) from SearchStepEntity s where s.name = ?1")
     SearchStepDto getDtoByName(String name);
 
-    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageName, s.pageUrl, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
-            " s.actionName, s.actionType, s.actionInput, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck, s.search.id) from SearchStepEntity s where s.id = ?1")
+    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageId, s.pageName, s.pageUrl, s.elementId, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
+            " s.actionId, s.actionName, s.actionType, s.actionInput, s.conditionId, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck) from SearchStepEntity s where s.id = ?1")
     SearchStepDto getDtoById(long id);
 
-    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageName, s.pageUrl, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
-            " s.actionName, s.actionType, s.actionInput, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck, s.search.id) from SearchStepEntity s")
+    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageId, s.pageName, s.pageUrl, s.elementId, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
+            " s.actionId, s.actionName, s.actionType, s.actionInput, s.conditionId, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck) from SearchStepEntity s")
     List<SearchStepDto> getAllDto();
-
-    @Query("select new com.barak.api.search.search_step_api.SearchStepDto(s.id, s.name, s.pageName, s.pageUrl, s.elementName, s.elementIdentifier, s.elementIdentifierType," +
-            " s.actionName, s.actionType, s.actionInput, s.conditionName, s.conditionType, s.millisecondsToWait, s.millisecondsToCheck, s.search.id) from SearchStepEntity s where s.search.id = ?1")
-    List<SearchStepDto> getAllBySearch(int id);
 
 }

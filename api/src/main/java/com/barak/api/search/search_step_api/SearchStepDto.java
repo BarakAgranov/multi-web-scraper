@@ -20,10 +20,9 @@ public class SearchStepDto {
     private String conditionType;
     private int millisecondsToWait;
     private int millisecondsToCheck;
-    private int searchId;
     private String serviceAddress;
 
-    public SearchStepDto(long id, String name, int pageId, String pageName, String pageUrl, int elementId, String elementName, String elementIdentifier, String elementIdentifierType, int actionId, String actionName, String actionType, String actionInput, int conditionId, String conditionName, String conditionType, int millisecondsToWait, int millisecondsToCheck, int searchId) {
+    public SearchStepDto(long id, String name, int pageId, String pageName, String pageUrl, int elementId, String elementName, String elementIdentifier, String elementIdentifierType, int actionId, String actionName, String actionType, String actionInput, int conditionId, String conditionName, String conditionType, int millisecondsToWait, int millisecondsToCheck) {
         this.id = id;
         this.name = name;
         this.pageId = pageId;
@@ -42,7 +41,6 @@ public class SearchStepDto {
         this.conditionType = conditionType;
         this.millisecondsToWait = millisecondsToWait;
         this.millisecondsToCheck = millisecondsToCheck;
-        this.searchId = searchId;
     }
 
     public long getId() {
@@ -117,10 +115,6 @@ public class SearchStepDto {
         return millisecondsToCheck;
     }
 
-    public int getSearchId() {
-        return searchId;
-    }
-
     public String getServiceAddress() {
         return serviceAddress;
     }
@@ -191,10 +185,6 @@ public class SearchStepDto {
 
     public void setMillisecondsToCheck(int millisecondsToCheck) {
         this.millisecondsToCheck = millisecondsToCheck;
-    }
-
-    public void setSearchId(int searchId) {
-        this.searchId = searchId;
     }
 
     public void setServiceAddress(String serviceAddress) {

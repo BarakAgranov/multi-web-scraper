@@ -50,6 +50,13 @@ search-service:
       # Expected error responses
       1. If a search with the same searchId as specified in the posted information already exists,
          an **801 - Already Exists** error with a error message will be returned
+  update-search:
+    description: Update a search
+    notes: |
+      # Normal response
+      Will aggregate information about the search and search components(website and search steps) and update the current state.
+      # Expected error responses
+      1. If no search to update with the given id is found, a **803 - Not Found** error will be returned
   delete-search:
     description: Deletes a search
     notes: |
@@ -82,6 +89,13 @@ search-step-service:
       # Expected error responses
       1. If a search step with the same stepId as specified in the posted information already exists,
          an **801 - Already Exists** error with a error message will be returned
+  update-search-step:
+    description: Update a search step
+    notes: |
+      # Normal response
+      Will aggregate information about the search steps and step's components(page, element, action, condition) and update the current state.
+      # Expected error responses
+       1. If no search to update with the given id is found, a **803 - Not Found** error will be returned
   delete-search-step:
     description: Deletes a search step
     notes: |
